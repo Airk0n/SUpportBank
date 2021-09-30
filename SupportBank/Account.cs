@@ -9,15 +9,32 @@ namespace SupportBank
         
         private List<Transaction> _transactions;  // Ask Ben: Property or method?
         public int Id { get; private set; }
-        public float Debt { get; set; }
-        public float Credit { get; set; }
+        public float Balance { get; private set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public float TotalAmount => Credit - Debt;
-
-        public bool AddTransaction()
+        
+        public void AddTransaction(Transaction newTransaction)
         {
-            return false;
+            // Add transaction to list;
+            _transactions.Add(newTransaction);
+            
+            // Adjust Credit/ 
+            if (newTransaction.AccountTo == this)
+            {
+                Balance -= newTransaction.Amount;
+            }
+            else
+            {
+                Balance += newTransaction.Amount;
+            }
+        }
+
+        public Account(string firstName, string lastName)
+        {
+            ActiveAccounts++;
+            this.Id = ActiveAccounts;
+            this.FirstName = firstName;
+            this.LastName = lastName;
         }
     }
 }
