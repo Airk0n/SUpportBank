@@ -11,11 +11,14 @@ namespace SupportBank
             // Read CSV. (part 1)
             // Create accounts/check they exist (part 2)
             // Create Transactions (part 2)
-            // Generate (part 3)
+            // Generate report(part 3)
             
-            //(part 4 after push)
             var atm = new AccountTransactionManager();
             atm.GenerateAccountsAndTransactions(@"./Transactions2014.csv");
+            
+            atm.GenerateReport("Todd");
+            
+            //(part 4 after push)
 
 
         }

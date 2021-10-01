@@ -6,12 +6,11 @@ namespace SupportBank
     public class Account
     {
         public static int ActiveAccounts { get; private set; } // Ask Ben: property or field
-        
-        private List<Transaction> _transactions;  // Ask Ben: Property or method?
+
+        private List<Transaction> _transactions = new List<Transaction>();  // Ask Ben: Property or method?
         public int Id { get; private set; }
         public float Balance { get; private set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
         
         public void AddTransaction(Transaction newTransaction)
         {
@@ -29,12 +28,16 @@ namespace SupportBank
             }
         }
 
-        public Account(string firstName, string lastName)
+        public List<Transaction> GetTransactions()
+        {
+            return _transactions;
+        }
+
+        public Account(string name)
         {
             ActiveAccounts++;
             this.Id = ActiveAccounts;
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            this.Name = name;
         }
     }
 }
