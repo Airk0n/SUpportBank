@@ -14,12 +14,8 @@ namespace SupportBank
             // Generate (part 3)
             
             //(part 4 after push)
-            
-            // test
-            foreach (var csvRow in CsvReader.Read(@"./Transactions2014.csv"))
-            {
-                Console.WriteLine(csvRow);
-            }
+            var atm = new AccountTransactionManager();
+            atm.GenerateAccountsAndTransactions(@"./Transactions2014.csv");
 
 
         }

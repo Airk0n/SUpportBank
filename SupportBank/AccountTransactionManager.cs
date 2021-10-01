@@ -11,14 +11,12 @@ namespace SupportBank
         public List<Transaction> Transactions { get; set; }
         public List<Account> Accounts { get; set; }
 
-        public void GenerateAccounts()
+        public void GenerateAccountsAndTransactions(string path)
         {
-            foreach (var csvRow in CsvReader.Read(@"./Transactions2014.csv"))
+            foreach (var csvRow in TransactionImporter.Read(path))
             {
-                Console.WriteLine(csvRow);
+                Console.WriteLine(csvRow["Amount"]);
             }
         }
-
-
     }
 }
