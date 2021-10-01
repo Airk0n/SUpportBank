@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SupportBank
 {
@@ -12,11 +13,9 @@ namespace SupportBank
 
         public void GenerateAccounts()
         {
-            var csvReader = new CSVReader(@"../fileToOpen.csv");
-            
-            foreach (var csvRow in csvReader)
+            foreach (var csvRow in CsvReader.Read(@"./Transactions2014.csv"))
             {
-                
+                Console.WriteLine(csvRow);
             }
         }
 

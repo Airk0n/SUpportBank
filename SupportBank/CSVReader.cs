@@ -43,7 +43,6 @@ namespace SupportBank
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-
             return GetEnumerator();
         }
     }
