@@ -6,7 +6,7 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace SupportBank
 {
-    public class CSVReader : IEnumerable<Dictionary<string,string>
+    public class CSVReader : IEnumerable<Dictionary<string,string>>
     {
 
         // Open CSV 
@@ -30,12 +30,15 @@ namespace SupportBank
                 textFieldParser.SetDelimiters(",");
                 while (!textFieldParser.EndOfData)
                 {
+                    // we have to make the IEnumerator, then return it.
                     string[] row = textFieldParser.ReadFields();
 
                     Console.WriteLine(row[0] + " " + row[1] + " " + row[2] + " " + row[3] + " " + row[4]);
                     
                 }
             }
+
+            return null;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
