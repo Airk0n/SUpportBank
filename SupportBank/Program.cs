@@ -15,8 +15,7 @@ namespace SupportBank
             
             var atm = new AccountTransactionManager();
             atm.GenerateAccountsAndTransactions(@"./Transactions2014.csv");
-            
-            atm.GenerateReport("Todd");
+            atm.GenerateReport();
             
             //(part 4 after push)
 

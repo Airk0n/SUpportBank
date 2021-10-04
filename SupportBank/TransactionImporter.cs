@@ -1,13 +1,51 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualBasic.FileIO;
 
 namespace SupportBank
 {
+    public enum SupportedFileTypes
+    {
+        csv,
+        json,
+        xml,
+        notSupported
+    }
     public static class TransactionImporter
     {
+
         public static IEnumerable<Dictionary<string, string>> Read(string path)
         {
-            using (TextFieldParser textFieldParser = new TextFieldParser(path))
+            // determine file type
+            switch (isSupportedFileType(path))
+            {
+                case SupportedFileTypes.csv:
+                    TextFieldParser textFieldParser = new TextFieldParser(path);
+                    yield return CsvToDictionary(textFieldParser);
+                    break;
+                case SupportedFileTypes.json:
+                    break;
+                case SupportedFileTypes.xml:
+                    break;
+                case SupportedFileTypes.notSupported:
+                    break;
+            }
+            
+            
+
+        }
+
+        private static SupportedFileTypes isSupportedFileType(string path)
+        {
+            // extract file extension(shall we use regular expressions?)
+            // check if file extension is in the list of supportedFileTypes
+            // give the correct enum based on if it's supported.
+            return SupportedFileTypes.csv;
+        }
+        
+        private static Dictionary<string, string> CsvToDictionary(TextFieldParser textFieldParser)
+        {
+            using (textFieldParser)
             {
                 textFieldParser.TextFieldType = FieldType.Delimited;
                 textFieldParser.SetDelimiters(",");
@@ -26,10 +64,15 @@ namespace SupportBank
                         { "Amount", row[4] },
                     };
 
-                    yield return transaction;
+                    return transaction;
                     
                 }
             }
+
+            return null;
+
         }
+
+
     }
 }
