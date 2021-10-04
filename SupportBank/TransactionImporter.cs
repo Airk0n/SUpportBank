@@ -21,7 +21,11 @@ namespace SupportBank
             {
                 case SupportedFileTypes.csv:
                     TextFieldParser textFieldParser = new TextFieldParser(path);
-                    yield return CsvToDictionary(textFieldParser);
+                    foreach (var tobenamed in CsvToDictionary(textFieldParser))
+                    {
+                        yield return tobenamed;
+                    }
+                    // yield return CsvToDictionary(textFieldParser);
                     break;
                 case SupportedFileTypes.json:
                     break;
@@ -30,9 +34,6 @@ namespace SupportBank
                 case SupportedFileTypes.notSupported:
                     break;
             }
-            
-            
-
         }
 
         private static SupportedFileTypes isSupportedFileType(string path)
@@ -43,7 +44,7 @@ namespace SupportBank
             return SupportedFileTypes.csv;
         }
         
-        private static Dictionary<string, string> CsvToDictionary(TextFieldParser textFieldParser)
+        private static IEnumerable<Dictionary<string, string>> CsvToDictionary(TextFieldParser textFieldParser)
         {
             using (textFieldParser)
             {
@@ -64,13 +65,9 @@ namespace SupportBank
                         { "Amount", row[4] },
                     };
 
-                    return transaction;
-                    
+                    yield return transaction;
                 }
             }
-
-            return null;
-
         }
 
 
